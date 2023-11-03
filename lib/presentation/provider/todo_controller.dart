@@ -83,7 +83,12 @@ class TodoController with ChangeNotifier {
     _tomorrowList = [];
     _upcomingList = [];
     var date = DateTime.now();
+
     for (int i = 0; i < todoList.length; i++) {
+      if (DateTime.parse(todoList[i].date)
+          .isBefore(DateTime(date.year, date.month, date.day))) {
+        return;
+      }
       if (todoList[i].date ==
           DateTime(date.year, date.month, date.day).toString()) {
         _todayList.add(todoList.elementAt(i));
